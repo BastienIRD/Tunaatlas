@@ -91,7 +91,8 @@ switch(DATA_LEVEL,
          georef_dataset<-dataset
          class(georef_dataset$value) <- "numeric"
          rm(dataset)
-         write.csv(georef_dataset, "data/end_step_1_level0.csv")
+         end_step1_level0 <- georef_dataset
+         # write.csv(georef_dataset, "data/end_step_1_level0.csv")
          
          #@juldebar: lines below should be removed since not required to generate Level 0 products
          ### 1.2 If data will be raised, retrieve nominal catch datasets (+ processings: codelist mapping for ICCAT)
@@ -124,7 +125,8 @@ switch(DATA_LEVEL,
              config$logger.info("Mapping code lists of nominal catch datasets OK")
            }
          }
-         write.csv(georef_dataset, "data/end_step_2_level0.csv")
+         end_step2_level0 <- georef_dataset
+         # write.csv(georef_dataset, "data/end_step_2_level0.csv")
          
        },
        
@@ -500,6 +502,9 @@ output_name_dataset <- file.path("data", paste0(entity$identifiers[["id"]], "_ha
 write.csv(dataset$dataset, output_name_dataset, row.names = FALSE)
 output_name_codelists <- file.path("data", paste0(entity$identifiers[["id"]], "_codelists.csv"))
 write.csv(dataset$codelists, output_name_codelists, row.names = FALSE)
+
+write.csv(end_step2_level0, "data/end_step2_level0.csv")
+write.csv(end_step1_level0, "data/end_step1_level0.csv")
 #----------------------------------------------------------------------------------------------------------------------------  
 entity$addResource("harmonized", output_name_dataset)
 entity$addResource("codelists", output_name_codelists)

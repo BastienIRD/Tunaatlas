@@ -91,6 +91,7 @@ switch(DATA_LEVEL,
          georef_dataset<-dataset
          class(georef_dataset$value) <- "numeric"
          rm(dataset)
+         write.csv2(georef_dataset, "end_step_1_level0.csv")
          
          #@juldebar: lines below should be removed since not required to generate Level 0 products
          ### 1.2 If data will be raised, retrieve nominal catch datasets (+ processings: codelist mapping for ICCAT)
@@ -123,6 +124,7 @@ switch(DATA_LEVEL,
              config$logger.info("Mapping code lists of nominal catch datasets OK")
            }
          }
+         write.csv2(georef_dataset, "end_step_2_level0.csv")
          
        },
        

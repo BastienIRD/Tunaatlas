@@ -625,8 +625,13 @@ write.csv(dataset$dataset, output_name_dataset, row.names = FALSE)
 output_name_codelists <- file.path("data", paste0(entity$identifiers[["id"]], "_codelists.csv"))
 write.csv(dataset$codelists, output_name_codelists, row.names = FALSE)
 dir.create("Rds")
+
+
+
+
+
    for (i in seq(2:8)){
-    saveRDS(as.name(paste0("georef_dataset_level0_step",i)), file = paste0("Rds/georef_dataset_level0_step", 
+    saveRDS(eval(as.symbol(paste0("georef_dataset_level0_step",i))), file = paste0("Rds/georef_dataset_level0_step", 
         i, paste0(entity$identifiers[["id"]],".rds")))
    }
 

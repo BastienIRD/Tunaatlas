@@ -77,8 +77,7 @@ get_rfmos_datasets_level0 <- function(rfmo, entity, config, options){
 													 regexpr("iccat", names(dataset_files)) > 0]
 				iccat_data <- do.call("rbind", lapply(dataset_files_iccat, readr::read_csv, guess_max = 0))
 				iccat_data <- as.data.frame(iccat_data)
-				saveRDS(Rds/iccat_data, "iccat_data_before_tretment"
-        saveRDS(iccat_data, "Rds/iccat_data_before_treatment.rds")
+			        saveRDS(iccat_data, "Rds/iccat_data_before_treatment.rds")
 
 				class(iccat_data$value) <- "numeric"
 

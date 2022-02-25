@@ -77,7 +77,9 @@ get_rfmos_datasets_level0 <- function(rfmo, entity, config, options){
 													 regexpr("iccat", names(dataset_files)) > 0]
 				iccat_data <- do.call("rbind", lapply(dataset_files_iccat, readr::read_csv, guess_max = 0))
 				iccat_data <- as.data.frame(iccat_data)
-        saveRDS(iccat_data, "iccat_data_before_treatment.Rds"
+				saveRDS(Rds/iccat_data, "iccat_data_before_tretment"
+        saveRDS(iccat_data, "Rds/iccat_data_before_treatment.rds")
+
 				class(iccat_data$value) <- "numeric"
 
 				# Deal with special case of ICCAT PS
@@ -108,6 +110,8 @@ get_rfmos_datasets_level0 <- function(rfmo, entity, config, options){
 				config$logger.warn(sprintf("Option include_%s = FALSE. Ignoring data...", rfmo))
 			}
 			iccat_data
+			saveRDS(iccat_data, "Rds/iccat_data_after_treatment.rds")
+
 		},
 		#IATTC
 		#--------------------------------------------------------------------------------------
@@ -125,6 +129,8 @@ get_rfmos_datasets_level0 <- function(rfmo, entity, config, options){
 				
 				# Deal with special case of IATTC PS
 				iattc_data <- unique(iattc_data)
+				saveRDS(iattc_data, "Rds/iattc_data_before_treatment.rds")
+
 					
 				## IATTC PS catch-and-effort are stratified as following:
 				# - 1 dataset for tunas, stratified by type of school (but not fishingfleet)
@@ -330,6 +336,7 @@ get_rfmos_datasets_level0 <- function(rfmo, entity, config, options){
 				config$logger.warn(sprintf("Option include_%s = FALSE. Ignoring data...", rfmo))
 			}
 			iattc_data
+			saveRDS(iattc_data, "Rds/iattc_data_after_treatment.rds")
 		}
 	)
 	

@@ -77,7 +77,7 @@ get_rfmos_datasets_level0 <- function(rfmo, entity, config, options){
 													 regexpr("iccat", names(dataset_files)) > 0]
 				iccat_data <- do.call("rbind", lapply(dataset_files_iccat, readr::read_csv, guess_max = 0))
 				iccat_data <- as.data.frame(iccat_data)
-			        saveRDS(iccat_data, "Rds/iccat_data_before_treatment.rds")
+			        iccat_data_before_treatment <- iccat_data
 
 				class(iccat_data$value) <- "numeric"
 
@@ -109,7 +109,8 @@ get_rfmos_datasets_level0 <- function(rfmo, entity, config, options){
 				config$logger.warn(sprintf("Option include_%s = FALSE. Ignoring data...", rfmo))
 			}
 			iccat_data
-			saveRDS(iccat_data, "Rds/iccat_data_after_treatment.rds")
+			iccat_data_after_treatment <- iccat_data
+			
 
 		},
 		#IATTC
@@ -128,7 +129,8 @@ get_rfmos_datasets_level0 <- function(rfmo, entity, config, options){
 				
 				# Deal with special case of IATTC PS
 				iattc_data <- unique(iattc_data)
-				saveRDS(iattc_data, "Rds/iattc_data_before_treatment.rds")
+				
+				iattc_data_before_treatment <- iattc_data
 
 					
 				## IATTC PS catch-and-effort are stratified as following:
@@ -287,7 +289,7 @@ get_rfmos_datasets_level0 <- function(rfmo, entity, config, options){
 							df_catch_tuna <- df_catch_tuna_settype
 						}
 					}
-				  
+				  		
 					iattc_data <- rbind(iattc_data, df_catch_billfish, df_catch_shark, df_catch_tuna)
 			  
 				}else if (variable=="effort"){
@@ -335,7 +337,8 @@ get_rfmos_datasets_level0 <- function(rfmo, entity, config, options){
 				config$logger.warn(sprintf("Option include_%s = FALSE. Ignoring data...", rfmo))
 			}
 			iattc_data
-			saveRDS(iattc_data, "Rds/iattc_data_after_treatment.rds")
+			iattc_data_after_treatment <- iattc_data
+			
 		}
 	)
 	

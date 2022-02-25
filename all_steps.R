@@ -50,8 +50,8 @@ if(!require(data.table)){
 
 #scripts
 url_scripts_create_own_tuna_atlas <- "https://raw.githubusercontent.com/eblondel/geoflow-tunaatlas/master/tunaatlas_scripts/generation"
-# source(file.path(url_scripts_create_own_tuna_atlas, "get_rfmos_datasets_level0.R")) #modified for geoflow
-source("https://raw.githubusercontent.com/BastienIRD/Tunaatlas/main/get_rfmos_dataset_leve0_bastien.R")
+source(file.path(url_scripts_create_own_tuna_atlas, "get_rfmos_datasets_level0.R")) #modified for geoflow
+# source("https://raw.githubusercontent.com/BastienIRD/Tunaatlas/main/get_rfmos_dataset_leve0_bastien.R")
 source(file.path(url_scripts_create_own_tuna_atlas, "retrieve_nominal_catch.R")) #modified for geoflow
 source(file.path(url_scripts_create_own_tuna_atlas, "map_codelists.R")) #modified for geoflow
 source(file.path(url_scripts_create_own_tuna_atlas, "convert_units.R")) #modified for geoflow

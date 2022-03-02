@@ -31,6 +31,10 @@ georef_dataset <- dataset %>%
   arrange(desc(value)) %>% 
   filter(row_number() ==1)
 
-assign("overlapping_ancient_method", dataset[ which(!(dataset$geographic_identifier %in% overlapping_zone$codesource_area & georef_dataset$source_authority == rfmo_not_to_keep)), ],, envir = .GlobalEnv)
-assign("reverse_overlapping", dataset[ which(!(dataset$geographic_identifier %in% overlapping_zone$codesource_area & georef_dataset$source_authority == rfmo_to_keep)), ],, envir = .GlobalEnv)
+assign("overlapping_ancient_method", 
+       dataset[ which(!(dataset$geographic_identifier %in% overlapping_zone$codesource_area & 
+                          georef_dataset$source_authority == rfmo_not_to_keep)), ], envir = .GlobalEnv)
+assign("reverse_overlapping", 
+      dataset[ which(!(dataset$geographic_identifier %in% overlapping_zone$codesource_area & georef_dataset$source_authority == rfmo_to_keep)), ],
+      envir = .GlobalEnv)
 }

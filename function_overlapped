@@ -31,9 +31,7 @@ overlapping_zone <- dbGetQuery(con, overlapping_zone_request)
 assign("overlapping_ancient_method", 
        dataset[ which(!(dataset$geographic_identifier %in% overlapping_zone$codesource_area & 
                           dataset$source_authority == rfmo_not_to_keep)), ], envir = .GlobalEnv)
-assign("reverse_overlapping", 
-       dataset[ which(!(dataset$geographic_identifier %in% overlapping_zone$codesource_area & dataset$source_authority == rfmo_to_keep)), ],
-       envir = .GlobalEnv)
+
 
 georef_dataset <- dataset %>%
   select(c(-source_authority,-value)) %>%
@@ -43,6 +41,9 @@ if (nrow(georef_dataset)!= nrow(dataset)){
   georef_dataset <- dataset %>%
     group_by(across(c(-source_authority,-value))) %>%
     slice(which.max(value))
+  assign("reverse_overlapping", 
+       dataset[ which(!(dataset$geographic_identifier %in% overlapping_zone$codesource_area & dataset$source_authority == rfmo_to_keep)), ],
+       envir = .GlobalEnv)
 } 
 
 # georef_dataset <- dataset %>%

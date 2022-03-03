@@ -36,16 +36,16 @@ assign("reverse_overlapping",
        envir = .GlobalEnv)
 
 
-georef_dataset <- dataset %>%
+test <- dataset %>%
   select(c(-source_authority,-value)) %>%
   distinct() #checking if there are really duplicates for a same strate
 
-if (nrow(georef_dataset)!= nrow(dataset)){
+if (nrow(test)!= nrow(dataset)){
   georef_dataset <- dataset %>%
     group_by(across(c(-source_authority,-value))) %>%
     slice(which.max(value))
 
-} 
+} else {georef_dataset <- dataset}
 
 # georef_dataset <- dataset %>%
 #   group_by(across(c(-source_authority,-value))) %>%
